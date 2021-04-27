@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata</title>
+    <style>
+        .biodata-foto {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            object-position: 0 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        .container {
+            margin: auto;
+            width: 50%;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Segoe UI';
+            flex: auto;
+            border: 0px solid black;
+            border-radius: 3%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        .content {
+            font-family:'Segoe UI';
+        }
+
+        .tabel {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: 'Segoe UI';
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .tabel td {
+            padding: 12px 15px;
+        }
+
+        .tabel tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .tabel tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .tabel tbody tr:last-of-type {
+            border-bottom: 2px solid blue;
+        }
+
+        .tabel tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <img src="rully-ktm.jpg" class="biodata-foto" alt="biodata-foto">
+            <h1>Hi, Saya Rully Afrizal Alwin</h1>
+            <div style="overflow-x:auto;">
+            </div>
+            <div style="overflow-x:auto; padding: 20px;">
+                <table class="tabel" width="100%">
+                    <tbody>
+                        <tr>
+                            <td><strong>Nama</strong></td> 
+                            <td>Rully Afrizal Alwin</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jenis Kelamin</strong></td> 
+                            <td>Laki-laki</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Usia</strong></td> 
+                            <td>19 Tahun</td>
+                        </tr>
+                    
+                        <tr>
+                            <td><strong>TTL</strong></td> 
+                            <td>Surabaya, 06 Maret 2002</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pendidikan Terkini</strong></td>
+                            <td>Sistem Informasi, Universitas Brawijaya</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td> 
+                            <td>rullyafrizal4@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pekerjaan</strong></td> 
+                            <td>Mahasiswa</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hardskills</strong></td> 
+                            <td>
+                                Java, PHP, Javascript, Typescript, MySQL,
+                                Laravel, NodeJS, AdonisJS, VueJS
+                            </td>
+                        </tr>
+    
+    
+                        <!-- and so on... -->
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+    
+</body>
+</html>
