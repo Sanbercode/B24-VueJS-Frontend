@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Router</title>
+</head>
+<body>
+<div id="app">
+    <h1>Tugas-14-VueRouter</h1>
+    <hr>
+    <br>
+    <router-link to="/halaman1">Halaman 1</router-link> |
+    <router-link to="/halaman2">Halaman 2</router-link> |
+    <router-link to="/halaman3">Halaman 3</router-link>
+
+
+    <router-view></router-view>
+
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script type="module">
+
+
+    const Halaman1 = { template: '<div><h1>Ini Halaman 1</h1></div>' }
+    const Halaman2 = { template: '<div><h1>Ini Halaman 2</h1></div>' }
+    const Halaman3 = { template: '<div><h1>Ini Halaman 3</h1></div>' }
+
+    const routes = [
+        { path: '/halaman1', component: Halaman1 },
+        { path: '/halaman2', component: Halaman2, meta: {login:true} },
+        { path: '/halaman3', component: Halaman3, meta: {login: true, admin: true}},
+        { path: '*', redirect: '/halaman1' }
+    ];
+
+    const router = new VueRouter({
+        routes
+    });
+
+    router.beforeEach((to, from, next) => {
+        if(to.matched.some(record => record.meta.login)){
+            let auth = true;
+            if(!auth){
+                alert('Access Restricted, silahkan login terlebih dahulu!');
+                next(false);
+            } else {
+                if (to.matched.some(record => record.meta.admin)) {
+                    let isAdmin = false;
+                    if (!isAdmin) {
+                        alert('Access Restricted, anda bukan Admin');
+                        next('/');
+                    } else {
+                        next();
+                    }
+                }
+                next();
+            }
+
+        } else {
+            next();
+        }
+    });
+
+    const app = new Vue({
+        router
+    }).$mount('#app')
+
+</script>
+
+
+</body>
+</html>
