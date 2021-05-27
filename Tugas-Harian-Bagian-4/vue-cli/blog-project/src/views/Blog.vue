@@ -40,9 +40,6 @@
           <v-list-item>
             <v-btn class="white--text" color="info" @click="setDialogComponent('UploadPhotoBlog')"><v-icon>mdi mdi-upload</v-icon></v-btn>
           </v-list-item>
-          <v-list-item>
-            <v-btn class="white--text" color="red" @click="remove(blog.id)"><v-icon>mdi mdi-delete</v-icon></v-btn>
-          </v-list-item>
         </v-list>
       </v-menu>
     </v-card>
@@ -56,7 +53,8 @@ export default {
   name: "Blog",
   components: {
     EditBlog: () => import('../components/EditBlog.vue'),
-    UploadPhotoBlog: () => import('../components/UploadPhotoBlog.vue')
+    UploadPhotoBlog: () => import('../components/UploadPhotoBlog.vue'),
+    Login: () => import('../components/Login.vue'),
   },
   data: () => ({
     blog: [],
@@ -79,44 +77,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-    remove (id) {
-      this.$swal({
-        showConfirmButton: true,
-        confirmButtonText: 'Yes',
-        showDenyButton: true,
-        title: 'Apakah anda yakin?',
-        icon: 'warning'
-      }).then(async res => {
-        if(res.isConfirmed) {
-          const config = {
-            method: 'post',
-            url: this.apiDomain + `/api/v2/blog/${id}`,
-            params: {_method: 'DELETE'},
-            headers: {
-              'Authorization' : 'Bearer ' + this.token.access_token
-            }
-          }
-
-          try {
-            await this.axios(config);
-            this.setAlert({
-              status: true,
-              color: 'primary',
-              text: 'Berhasil Menghapus'
-            });
-            await this.$router.push('/blogs');
-          } catch (error) {
-            console.log(error);
-            this.setAlert({
-              status: true,
-              color: 'error',
-              text: 'Gagal Menghapus Blog'
-            })
-          }
-
-        }
-      })
     },
     ...mapActions({
       setDialogComponent: 'dialog/setComponent',

@@ -70,9 +70,7 @@ export default {
             text: 'Berhasil Menambahkan Blog'
           });
           this.$emit('closed', false);
-          setTimeout(() => {
-            window.location.reload();
-          }, 300);
+          this.$emit('refresh');
         } catch (error) {
           console.log(error);
           this.setAlert({

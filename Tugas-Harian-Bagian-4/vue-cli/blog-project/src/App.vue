@@ -66,13 +66,6 @@
       <v-toolbar-title @click="$router.push('/')" style="cursor: pointer;"><strong>Blog Application</strong></v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <v-btn fab absolute bottom right small @click="setDialogComponent('AddBlog')"
-             class="mr-2 black--text" color="white"
-             v-if="Object.keys(token).length !== 0 && isBlogs"
-      >
-        <v-icon>mdi mdi-plus</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <!-- Sizes your content based upon application components -->
@@ -103,7 +96,6 @@ export default {
   components: {
     Alert: () => import('./components/Alert.vue'),
     Login: () => import('./components/Login.vue'),
-    AddBlog: () => import('./components/AddBlog.vue')
   },
   data: () => ({
     drawer: false,
