@@ -11,24 +11,24 @@
 
     <v-navigation-drawer app v-model="drawer">
       <v-list>
-        <v-list-item v-if="!guest" to="" style="text-decoration: none;">
+        <v-list-item v-if="!guest" to="/profile" style="text-decoration: none;">
           <v-list-item-avatar>
             <v-img :src="user.photo_profile ? 'http://demo-api-vue.sanbercloud.com/' + user.photo_profile : 'https://randomuser.me/api/portraits/men/70.jpg'"></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>
               <strong>{{ user.name }}</strong>
-              <v-icon>mdi-arrow-right</v-icon>
+              <v-icon right>mdi-arrow-right-circle</v-icon>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
         <div class="pa-2" v-if="guest">
-          <v-btn block color="indigo darken-4" class="white--text mb-2 rounded-pill" @click="setDialogComponent('Login')">
+          <v-btn block color="#0F3B5F" class="white--text mb-2 rounded-pill" @click="setDialogComponent('Login')">
             <v-icon left>mdi-lock</v-icon>
             Login
           </v-btn>
-          <v-btn block color="red darken-2" class="white--text rounded-pill" @click="setDialogComponent('Register')">
+          <v-btn block color="red darken-2" class="white--text rounded-pill" to="/register" @click="drawer = !drawer">
             <v-icon left>mdi-account</v-icon>
             Register
           </v-btn>
@@ -58,12 +58,21 @@
       </template>
     </v-navigation-drawer>
 
-    <v-app-bar app color="indigo darken-4" dark>
+    <v-app-bar app color="#0F3B5F" dark v-if="!isRegister">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-btn v-if="!isHome" icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
       <v-toolbar-title @click="$router.push('/')" style="cursor: pointer;"><strong>Blog Application</strong></v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn fab absolute bottom right small @click="setDialogComponent('AddBlog')"
+             class="mr-2 black--text" color="white"
+             v-if="Object.keys(token).length !== 0 && isBlogs"
+      >
+        <v-icon>mdi mdi-plus</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <!-- Sizes your content based upon application components -->
@@ -77,8 +86,10 @@
       </v-container>
     </v-main>
 
-    <v-footer app>
-      2021 - Rully Afrizal Alwin
+    <v-footer app padless>
+      <v-col class="text-center" cols="12">
+        &copy;{{ new Date().getFullYear() }} — <strong>Blog App</strong> — by Rully Afrizal Alwin
+      </v-col>
     </v-footer>
   </v-app>
 </template>
@@ -91,7 +102,8 @@ export default {
   name: 'App',
   components: {
     Alert: () => import('./components/Alert.vue'),
-    Login: () => import('./components/Login.vue')
+    Login: () => import('./components/Login.vue'),
+    AddBlog: () => import('./components/AddBlog.vue')
   },
   data: () => ({
     drawer: false,
@@ -111,7 +123,7 @@ export default {
     async logout () {
       const config = {
         method: 'post',
-        url: 'http://demo-api-vue.sanbercloud.com/api/v2/auth/logout',
+        url: 'https://demo-api-vue.sanbercloud.com/api/v2/auth/logout',
         headers: {
           'Authorization': 'Bearer ' + this.token.access_token
         }
@@ -140,6 +152,12 @@ export default {
   computed: {
     isHome(){
       return (this.$route.path === '/' || this.$route.path === '/home');
+    },
+    isRegister () {
+      return (this.$route.path === '/register');
+    },
+    isBlogs () {
+      return (this.$route.path === '/blogs');
     },
     ...mapGetters({
       dialogStatus: 'dialog/status',

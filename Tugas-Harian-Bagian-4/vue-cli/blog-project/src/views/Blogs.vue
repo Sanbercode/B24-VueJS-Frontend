@@ -5,7 +5,7 @@
     </v-subheader>
 
     <v-layout wrap>
-      <v-flex  v-for="(blog) in blogs" :key="`campaign-` + blog.id">
+      <v-flex v-for="(blog) in blogs" :key="`campaign-` + blog.id">
         <blog-item :blog="blog"/>
       </v-flex>
     </v-layout>

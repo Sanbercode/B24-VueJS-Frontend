@@ -1,6 +1,6 @@
 <template>
   <v-hover v-slot:default="{ hover }">
-    <v-card :to="'/blog/' + blog.id" :elevation="hover ? 12 : 2" max-width="570" class="flexcard pa-3 mb-4 mr-5 rounded-lg" style="text-decoration: none;">
+    <v-card :to="'/blog/' + blog.id" :elevation="hover ? 14 : 2" max-width="570" class="flexcard pa-3 mb-4 mr-5 rounded-lg" style="text-decoration: none;">
       <v-img :src="blog.photo ? apiDomain + blog.photo : 'https://dummyimage.com/16:9x1080/'" max-height="200px" class="rounded-lg">
         <template v-slot:placeholder>
           <v-skeleton-loader type="image"></v-skeleton-loader>

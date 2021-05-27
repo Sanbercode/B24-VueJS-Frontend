@@ -1,6 +1,6 @@
 <template>
   <v-card class="rounded-lg">
-    <v-toolbar dark color="indigo darken-4">
+    <v-toolbar dark color="#0F3B5F">
       <v-btn icon dark @click.native="close">
         <v-icon>mdi-close-circle</v-icon>
       </v-btn>
@@ -8,12 +8,12 @@
     </v-toolbar>
 
     <v-container fluid>
-      <v-form ref="form" v-model="valid" lazy-validation>
-        <v-text-field v-model="email" :rules="emailRules"
+      <v-form ref="form" v-model="valid" lazy-validation class="pa-3">
+        <v-text-field v-model="email" :rules="emailRules" filled class="rounded-t-lg"
                       label="Email" required append-icon="mdi-email">
 
         </v-text-field>
-        <v-text-field v-model="password"
+        <v-text-field v-model="password" filled class="rounded-t-lg"
                       :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                       :rules="passwordRules" :type="showPassword ? 'text' : 'password'"
                       label="Password" hint="At least 6 characters" counter
@@ -21,9 +21,9 @@
 
         </v-text-field>
         <div class="text-xs-center">
-          <v-btn color="indigo darken-4" :disabled="!valid" @click="submit" class="white--text">
+          <v-btn color="#0F3B5F" :disabled="!valid" @click="submit" class="white--text rounded-lg" block>
+            <v-icon left dark>mdi-lock-open</v-icon>
             Login
-            <v-icon right dark>mdi-lock-open</v-icon>
           </v-btn>
         </div>
       </v-form>
